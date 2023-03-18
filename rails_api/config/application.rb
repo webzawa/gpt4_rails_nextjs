@@ -23,5 +23,16 @@ module RailsApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # CORS settings
+    config.middleware.use Rack::Cors do
+      allow do
+        origins 'localhost:33000' # またはフロントエンドが動作しているドメイン
+        resource '*',
+          headers: :any,
+          methods: %i[get post put patch delete options head]
+      end
+    end
+
   end
 end
